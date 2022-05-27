@@ -1,6 +1,7 @@
 #include <Adafruit_GFX.h>
 #include <MCUFRIEND_kbv.h>
-#include <Fonts/FreeSansBold24pt7b.h>
+#include "UbuntuMono_Med.h"
+#include "UbuntuMono_Big.h"
 
 #define LCD_CS A3
 #define LCD_CD A2
@@ -18,13 +19,9 @@ void setup() {
     uint16_t id = tft.readID();
 
     tft.begin(id);
-    tft.setRotation(3);
-    tft.fillScreen(0x0000);
+    tft.setRotation(1);
 
-    tft.setFont(&FreeSansBold24pt7b);
-    tft.setCursor(50, 50);
-    tft.setTextColor(0xFFFF);
-    tft.print("PasteMyst");
+    draw(0);
 }
 
 void loop() {
@@ -36,6 +33,21 @@ void loop() {
         long int num = ((int64_t) packet[0] << 56) | ((int64_t) packet[1] << 48) | ((int64_t) packet[2] << 40) |  ((int64_t) packet[3] << 32) |
                        ((int64_t) packet[4] << 24) | ((int64_t) packet[5] << 16) | ((int64_t) packet[6] << 8)  |  ((int64_t) packet[7]);
 
-        Serial.println(num);
+        draw(num);
     }
+}
+
+void draw(int num) {
+    tft.fillScreen(0x0000);
+
+    tft.setFont(&UbuntuMono_R16pt7b);
+    tft.setCursor(50, 85);
+    tft.setTextColor(0xA534);
+    tft.setTextSize(1);
+    tft.print("PasteMyst Counter");
+
+    tft.setFont(&UbuntuMono_R34pt7b);
+    tft.setCursor(50, 150);
+    tft.setTextColor(0xEB61);
+    tft.print(num);
 }
