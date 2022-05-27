@@ -28,4 +28,14 @@ void setup() {
 }
 
 void loop() {
+    if (Serial.available() > 0) {
+        uint8_t packet[8];
+        Serial.readBytes(packet, 8);
+
+        // convert 8 bytes to long, big-endian format
+        long int num = ((int64_t) packet[0] << 56) | ((int64_t) packet[1] << 48) | ((int64_t) packet[2] << 40) |  ((int64_t) packet[3] << 32) |
+                       ((int64_t) packet[4] << 24) | ((int64_t) packet[5] << 16) | ((int64_t) packet[6] << 8)  |  ((int64_t) packet[7]);
+
+        Serial.println(num);
+    }
 }
