@@ -2,6 +2,8 @@
 
 A small project that shows the number of currently active pastes on https://paste.myst.rs/ on my Arduino.
 
+![20220527_164325-min](https://user-images.githubusercontent.com/7966628/170723303-51f57220-3f14-4c94-8449-98f86296ebb3.jpg)
+
 ## How it works
 
 A small D program fetches the current paste count from the [API](https://paste.myst.rs/api-docs/data) and sends it to the Arduino via serial.
